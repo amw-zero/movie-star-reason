@@ -17,13 +17,20 @@ let state = ref({movies: [||], favoritedMovies: []});
 module Command = {
   let viewTopMovies = state => {
     ...state,
-    movies: [|{title: "Wayne's World"}|],
+    movies: [|
+      {title: "Wayne's World"},
+      {title: "Wayne's World 2"},
+      {title: "Unabomber"},
+      {title: "Cat in the Hat"},
+      {title: "Sharkboy and Lavagirl"},      
+    |],
   };
-  let toggleFavoriteMovie = (state, movie) => {
-    let favoritedMovies = switch (List.filter(m => m == movie, state.favoritedMovies)) {
+  let toggleFavoriteMovie = (movie, state) => {
+    let favoritedMovies =
+      switch (List.filter(m => m == movie, state.favoritedMovies)) {
       | [] => [movie, ...state.favoritedMovies]
       | _ => List.filter(m => m != movie, state.favoritedMovies)
-    };
+      };
 
     {...state, favoritedMovies};
   };
@@ -32,10 +39,10 @@ module Command = {
 printState(state, "Initial state");
 
 state := Command.viewTopMovies(state^);
-state := Command.toggleFavoriteMovie(state^, state^.movies[0]);
+state := Command.toggleFavoriteMovie(state^.movies[0], state^);
 
 printState(state, "After favoriting");
 
-state := Command.toggleFavoriteMovie(state^, state^.movies[0]);
+state := Command.toggleFavoriteMovie(state^.movies[0], state^);
 
 printState(state, "After update");
