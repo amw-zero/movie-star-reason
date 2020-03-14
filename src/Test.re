@@ -13,14 +13,13 @@ let testViewingMovies = () => {
 let testFavoritingMovies = () => {
   let title = "Movie 1"
   let state = {movies: [|{title: title}|], favoritedMovies: []};
-  
-  let state = Command.toggleFavoriteMovie(state.movies[0], state);
 
+  let state = Command.toggleFavoriteMovie(state.movies[0], state);
 
   expect(List.hd(state.favoritedMovies).title, title);
 };
 
-flet tests = [
+let tests = [
   {test: testViewingMovies, description: "Viewing Movies"},
   {test: testFavoritingMovies, description: "Favoriting Movies"}
 ];
