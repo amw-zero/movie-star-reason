@@ -19,9 +19,18 @@ let testFavoritingMovies = () => {
   expect(List.hd(state.favoritedMovies).title, title);
 };
 
+let testClearingFavoriteMovies = () => {
+  let state = {movies: [||], favoritedMovies: [{title: "Favorite"}]};
+
+  let state = Command.clearFavoriteMovies(state);
+
+  expect(List.length(state.favoritedMovies) |> string_of_int, "0");
+}
+
 let tests = [
   {test: testViewingMovies, description: "Viewing Movies"},
-  {test: testFavoritingMovies, description: "Favoriting Movies"}
+  {test: testFavoritingMovies, description: "Favoriting Movies"},
+  {test: testClearingFavoriteMovies, description: "Clearing Favorite Movies"}  
 ];
 
 runTests(tests);

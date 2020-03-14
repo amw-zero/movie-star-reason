@@ -32,6 +32,7 @@ module Command = {
 
     {...state, favoritedMovies};
   };
+  let clearFavoriteMovies = state => { ...state, favoritedMovies: [] };
 };
 
 /*
