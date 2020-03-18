@@ -19,10 +19,9 @@ type failedTestCase = {
 
 let expect = (expected, actual) =>
   expected == actual
-    ? Pass
-    : Fail("Expected: " ++ expected ++ " | Received: " ++ actual);
+    ? Pass : Fail("Expected: " ++ expected ++ " | Received: " ++ actual);
 
-let runTests = (tests) => {
+let runTests = tests => {
   let failingTests =
     tests
     |> List.map(testCase =>
@@ -47,8 +46,7 @@ let runTests = (tests) => {
 
   let messages = List.map(failedTestMessage, failingTests);
   switch (List.length(messages)) {
-    | 0 => Js.log("All tests passed.");
-    | _ => Js.log(messages |> String.concat("\n"))
+  | 0 => Js.log("All tests passed.")
+  | _ => Js.log(messages |> String.concat("\n"))
   };
 };
-
